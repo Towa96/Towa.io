@@ -1,13 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="ru">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Links</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Links</title>
+<link href="style.css" rel="stylesheet"/>
 </head>
 <body>
-
 <div id="enter-overlay" style="
  position:fixed;
  inset:0;
@@ -23,73 +23,37 @@
  ">
  Click to enter...
 </div>
-
-
-
-
-
-
-
-
-
-
-
 <!-- 🎬 Видеофон -->
-<video autoplay loop muted playsinline id="bgvid">
-  <source src="bg.mp4" type="video/mp4">
+<video autoplay="" id="bgvid" loop="" muted="" playsinline="">
+<source src="bg.mp4" type="video/mp4"/>
 </video>
-
 <div class="card">
-  <h2>( _ . _ )  °z Z</h2>
-
-  <div class="profile">
-    <img class="avatar" src="avatar.jpg" alt="avatar">
-    <div class="userinfo">
-      <div class="nickname">Towa</div>
-      <div class="status">zxc? · ❄️</div>
-    </div>
-  </div>
-
-  <section>
-    <h3>📌 Pinned track</h3>
-    <iframe style="border-radius:12px"
-            src="https://music.yandex.ru/track/141101353?utm_source=desktop&utm_medium=copy_link"
-            width="100%" height="152" frameborder="0"
-            allow="autoplay; clipboard-write; encrypted-media; picture-in-picture">
-    </iframe>
-  </section>
-
-  <section>
-    <h3>😊 About me</h3>
-    <ul>
-      <li>🐾 The Gambler. A bit of a programmer.</li>
-      <li>🎮 I like to play Dota2! and other games.</li>
-      <li>🎧 I listen to everything that can be listened to.</li>
-      </a></li>
-    </ul>
-  </section>
-
-  <section>
-    <iframe width="100%" height="230"
-            src=""
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowfullscreen>
-    </iframe>
-  </section>
-
+<h2>( _ . _ )  °z Z</h2>
+<div class="profile">
+<img alt="avatar" class="avatar" src="avatar.jpg"/>
+<div class="userinfo">
+<div class="nickname">Towa</div>
+<div class="status">zxc? · ❄️</div>
 </div>
+</div>
+<section>
+<h3>📌 Pinned track</h3>
+<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6yyWXummQEajD6dLLOjCkY?utm_source=generator" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
 
+<section>
+<h3>😊 About me</h3>
+<ul>
+<li>🐾 The Gambler. A bit of a programmer.</li>
+<li>🎮 I like to play Dota2! and other games.</li>
+<li>🎧 I listen to everything that can be listened to.</li>
 
-
-
-
-
-
-
-
-
-
+</ul>
+</section>
+<section>
+<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="230" src="" width="100%">
+</iframe>
+</section>
+</div>
 <script>
 document.addEventListener('DOMContentLoaded', () => {
   const ov = document.getElementById('enter-overlay');
@@ -102,11 +66,6 @@ document.addEventListener('DOMContentLoaded', () => {
   ov.addEventListener('touchstart', enter, {once:true});
 });
 </script>
-
-
-
-
-
 <style>
 #mini-player {
  position: fixed;
@@ -137,9 +96,6 @@ document.addEventListener('DOMContentLoaded', () => {
  opacity:0.85;
 }
 </style>
-
-
-  
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const audio = document.getElementById("music");
@@ -160,8 +116,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   }
 });
 </script>
-
-
 <style>
 #mini-player {
  position: fixed;
@@ -195,10 +149,6 @@ document.addEventListener("DOMContentLoaded",()=>{
  width:80px;
 }
 </style>
-
-
-  
-
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const audio = document.getElementById("music");
@@ -224,8 +174,6 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
 });
 </script>
-
-
 <style>
 #mini-player {
  position: fixed;
@@ -259,25 +207,21 @@ document.addEventListener("DOMContentLoaded",()=>{
  width:80px;
 }
 </style>
-
 <div id="mini-player">
-  <div id="mp-btn">
-    <svg id="mp-icon-play" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M8 5v14l11-7z"/></svg>
-    <svg id="mp-icon-pause" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
-  </div>
-
-  <div id="mp-mute">
-    <svg id="mp-icon-vol" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M5 9v6h4l5 5V4l-5 5H5z"/></svg>
-    <svg id="mp-icon-muted" style="display:none;" xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" fill="white"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5 10.5 18H5v-6h4.5L15 4.5l1.5 1.5L12 10.5l4.5 4.5 1.5-1.5L16.5 12z"/></svg>
-  </div>
-
-  <div id="mp-title">Poison Tree</div>
-  <input id="volume" type="range" min="0" max="1" step="0.01" value="1">
-  <audio id="music">
-    <source src="poisontree.mp3" type="audio/mpeg">
-  </audio>
+<div id="mp-btn">
+<svg fill="white" height="28" id="mp-icon-play" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
+<svg fill="white" height="28" id="mp-icon-pause" style="display:none;" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
 </div>
-
+<div id="mp-mute">
+<svg fill="white" height="26" id="mp-icon-vol" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M5 9v6h4l5 5V4l-5 5H5z"></path></svg>
+<svg fill="white" height="26" id="mp-icon-muted" style="display:none;" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5 10.5 18H5v-6h4.5L15 4.5l1.5 1.5L12 10.5l4.5 4.5 1.5-1.5L16.5 12z"></path></svg>
+</div>
+<div id="mp-title">Poison Tree</div>
+<input id="volume" max="1" min="0" step="0.01" type="range" value="1"/>
+<audio id="music">
+<source src="poisontree.mp3" type="audio/mpeg"/>
+</audio>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded",()=>{
   const audio = document.getElementById("music");
@@ -324,6 +268,5 @@ document.addEventListener("DOMContentLoaded",()=>{
   };
 });
 </script>
-
 </body>
 </html>
