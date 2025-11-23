@@ -1,272 +1,141 @@
 <!DOCTYPE html>
-
 <html lang="ru">
 <head>
 <meta charset="utf-8"/>
-<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Links</title>
-<link href="style.css" rel="stylesheet"/>
+<link rel="stylesheet" href="style.css"/>
 </head>
 <body>
-<div id="enter-overlay" style="
- position:fixed;
- inset:0;
- backdrop-filter: blur(10px);
- background: rgba(0,0,0,0.6);
- display:flex;
- align-items:center;
- justify-content:center;
- color:white;
- font-size:2rem;
- z-index:99999;
- cursor:pointer;
- ">
- Click to enter...
+<audio id="snowfall" src="snowfall.mp3"></audio>
+<div id="mini-player" style="
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: rgba(0,0,0,0.65);
+  padding: 10px 15px;
+  border-radius: 12px;
+  backdrop-filter: blur(8px);
+  color: white;
+  font-family: Inter, sans-serif;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  z-index: 9999;">
+
+  <button id="playBtn" style="
+    background:none;
+    border:1px solid #fff;
+    padding:5px 10px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;">▶</button>
+
+  <button id="pauseBtn" style="
+    background:none;
+    border:1px solid #fff;
+    padding:5px 10px;
+    border-radius:6px;
+    color:white;
+    cursor:pointer;">⏸</button>
+
+  <button id="muteBtn" style="background:none; border:1px solid #fff; padding:5px 10px; border-radius:6px; color:white; cursor:pointer;">🔇</button>
+
+  <input id="seekBar" type="range" value="0" min="0" max="100" style="width:120px;">
 </div>
-<!-- 🎬 Видеофон -->
-<video autoplay="" id="bgvid" loop="" muted="" playsinline="">
-<source src="bg.mp4" type="video/mp4"/>
+
+<div id="enter-overlay" style="position:fixed; inset:0; backdrop-filter: blur(10px); background: rgba(0,0,0,0.6); display:flex; align-items:center; justify-content:center; color:white; font-size:2rem; z-index:99999; cursor:pointer;">Click to enter...</div>
+
+<video id="bgvid" playsinline autoplay muted loop>
+  <source src="bg.mp4" type="video/mp4"/>
 </video>
+
 <div class="card">
-<h2>( _ . _ )  °z Z</h2>
-<div class="profile">
-<img alt="avatar" class="avatar" src="avatar.jpg"/>
-<div class="userinfo">
-<div class="nickname">Towa</div>
-<div class="status">zxc? · ❄️</div>
-</div>
-</div>
-<section>
-<h3>📌 Pinned track</h3>
-<iframe style="border-radius:12px" src="https://open.spotify.com/embed/track/6yyWXummQEajD6dLLOjCkY?utm_source=generator" width="100%" height="352" frameBorder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+  <div class="card-row">
 
-<section>
-<h3>😊 About me</h3>
-<ul>
-<li>🐾 The Gambler. A bit of a programmer.</li>
-<li>🎮 I like to play Dota2! and other games.</li>
-<li>🎧 I listen to everything that can be listened to.</li>
+    <div class="left-column">
+      <img class="avatar-large" src="avatar.jpg" alt="avatar"/>
+      <div style="margin-top:10px;"><a href="https://steamcommunity.com/profiles/76561199204475598/" target="_blank" style="color:#c983ff; text-decoration:none;">Steam</a></div>
+<div style="margin-top:5px;"><a href="https://www.donationalerts.com/r/ketaminecp" target="_blank" style="color:#c983ff; text-decoration:none;">Donate</a></div><div class="userinfo-large">
+        <div class="nickname">Towa</div>
+        <div class="status">zxc? · ❄️</div>
+      </div>
+    </div>
 
-</ul>
-</section>
-<section>
-<iframe allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen="" frameborder="0" height="230" src="" width="100%">
-</iframe>
-</section>
+    <div class="right-column">
+      <section>
+        <h3>📌 Pinned track</h3>
+        <iframe id="spotify-frame" style="border-radius:12px" src="https://open.spotify.com/embed/track/6yyWXummQEajD6dLLOjCkY?utm_source=generator" width="100%" height="352" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+</script>
+
+      </section>
+
+      <section>
+        <h3>😊 About me</h3>
+        <ul>
+          <li>🐾 The Gambler. A bit of a programmer.</li>
+          <li>🎮 I like to play Dota2! and other games.</li>
+          <li>🎧 I listen to everything that can be listened to.</li>
+        </ul>
+      </section>
+
+      <section>
+        <iframe frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen width="100%" height="230"></iframe>
+      </section>
+    </div>
+  </div>
 </div>
+
+
+<script>
+// --- AUTOPLAY AFTER FIRST CLICK ---
+document.addEventListener('DOMContentLoaded', () => {
+  const overlay = document.getElementById('enter-overlay');
+  const spotify = document.getElementById('spotify-frame');
+  const snowfall = document.getElementById('snowfall');
+
+  function startAll() {
+    overlay.remove();
+    snowfall.volume = 1.0;
+    snowfall.play().catch(e => console.log("Autoplay blocked:", e));
+
+    const baseUrl = "https://open.spotify.com/embed/track/6yyWXummQEajD6dLLOjCkY?utm_source=generator";
+    spotify.src = baseUrl + "&autoplay=1";
+  }
+
+  overlay.addEventListener('click', startAll, { once: true });
+  overlay.addEventListener('touchstart', startAll, { once: true });
+});
+</script>
+
+
+
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-  const ov = document.getElementById('enter-overlay');
-  const a = document.getElementById('music');
-  function enter(){
-    ov.remove();
-    if(a){ a.play().catch(()=>{}); }
-  }
-  ov.addEventListener('click', enter, {once:true});
-  ov.addEventListener('touchstart', enter, {once:true});
-});
-</script>
-<style>
-#mini-player {
- position: fixed;
- bottom: 20px;
- right: 20px;
- background: rgba(20,20,20,0.75);
- backdrop-filter: blur(12px);
- border-radius: 16px;
- padding: 14px 18px;
- z-index: 9999;
- display:flex;
- align-items:center;
- gap:14px;
- box-shadow: 0 6px 18px rgba(0,0,0,0.45);
- color:white;
- font-family: sans-serif;
-}
-#mp-btn {
- width:32px;
- height:32px;
- cursor:pointer;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-#mp-title {
- font-size:14px;
- opacity:0.85;
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const audio = document.getElementById("music");
-  const playIcon = document.getElementById("mp-icon-play");
-  const pauseIcon = document.getElementById("mp-icon-pause");
-  const btn = document.getElementById("mp-btn");
+  const audio = document.getElementById("snowfall");
+  const playBtn = document.getElementById("playBtn");
+  const pauseBtn = document.getElementById("pauseBtn");
+  const seekBar = document.getElementById("seekBar");
 
-  btn.onclick = ()=>{
-    if(audio.paused){
-      audio.play();
-      playIcon.style.display="none";
-      pauseIcon.style.display="block";
-    } else {
-      audio.pause();
-      playIcon.style.display="block";
-      pauseIcon.style.display="none";
-    }
-  }
-});
-</script>
-<style>
-#mini-player {
- position: fixed;
- bottom: 20px;
- right: 20px;
- background: rgba(20,20,20,0.75);
- backdrop-filter: blur(12px);
- border-radius: 16px;
- padding: 14px 18px;
- z-index: 9999;
- display:flex;
- align-items:center;
- gap:14px;
- box-shadow: 0 6px 18px rgba(0,0,0,0.45);
- color:white;
- font-family: sans-serif;
-}
-#mp-btn {
- width:32px;
- height:32px;
- cursor:pointer;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-#mp-title {
- font-size:14px;
- opacity:0.85;
-}
-#volume {
- width:80px;
-}
-</style>
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const audio = document.getElementById("music");
-  const playIcon = document.getElementById("mp-icon-play");
-  const pauseIcon = document.getElementById("mp-icon-pause");
-  const btn = document.getElementById("mp-btn");
-  const volume = document.getElementById("volume");
+  playBtn.onclick = () => audio.play();
+  pauseBtn.onclick = () => audio.pause();
 
-  btn.onclick = ()=>{
-    if(audio.paused){
-      audio.play();
-      playIcon.style.display="none";
-      pauseIcon.style.display="block";
-    } else {
-      audio.pause();
-      playIcon.style.display="block";
-      pauseIcon.style.display="none";
-    }
-  };
+  audio.addEventListener("timeupdate", () => {
+    seekBar.value = (audio.currentTime / audio.duration) * 100 || 0;
+  });
 
-  volume.oninput = ()=>{
-    audio.volume = volume.value;
-  };
-});
-</script>
-<style>
-#mini-player {
- position: fixed;
- bottom: 20px;
- right: 20px;
- background: rgba(20,20,20,0.75);
- backdrop-filter: blur(12px);
- border-radius: 16px;
- padding: 14px 18px;
- z-index: 9999;
- display:flex;
- align-items:center;
- gap:14px;
- box-shadow: 0 6px 18px rgba(0,0,0,0.45);
- color:white;
- font-family: sans-serif;
-}
-#mp-btn, #mp-mute {
- width:32px;
- height:32px;
- cursor:pointer;
- display:flex;
- align-items:center;
- justify-content:center;
-}
-#mp-title {
- font-size:14px;
- opacity:0.85;
-}
-#volume {
- width:80px;
-}
-</style>
-<div id="mini-player">
-<div id="mp-btn">
-<svg fill="white" height="28" id="mp-icon-play" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg"><path d="M8 5v14l11-7z"></path></svg>
-<svg fill="white" height="28" id="mp-icon-pause" style="display:none;" viewbox="0 0 24 24" width="28" xmlns="http://www.w3.org/2000/svg"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"></path></svg>
-</div>
-<div id="mp-mute">
-<svg fill="white" height="26" id="mp-icon-vol" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M5 9v6h4l5 5V4l-5 5H5z"></path></svg>
-<svg fill="white" height="26" id="mp-icon-muted" style="display:none;" viewbox="0 0 24 24" width="26" xmlns="http://www.w3.org/2000/svg"><path d="M16.5 12l4.5 4.5-1.5 1.5L15 13.5 10.5 18H5v-6h4.5L15 4.5l1.5 1.5L12 10.5l4.5 4.5 1.5-1.5L16.5 12z"></path></svg>
-</div>
-<div id="mp-title">Poison Tree</div>
-<input id="volume" max="1" min="0" step="0.01" type="range" value="1"/>
-<audio id="music">
-<source src="poisontree.mp3" type="audio/mpeg"/>
-</audio>
-</div>
-<script>
-document.addEventListener("DOMContentLoaded",()=>{
-  const audio = document.getElementById("music");
-  const playIcon = document.getElementById("mp-icon-play");
-  const pauseIcon = document.getElementById("mp-icon-pause");
-  const btn = document.getElementById("mp-btn");
+  seekBar.addEventListener("input", () => {
+    audio.currentTime = (seekBar.value / 100) * audio.duration;
+  });
 
-  const muteBtn = document.getElementById("mp-mute");
-  const volIcon = document.getElementById("mp-icon-vol");
-  const mutedIcon = document.getElementById("mp-icon-muted");
-
-  const volume = document.getElementById("volume");
-
-  btn.onclick = ()=>{
-    if(audio.paused){
-      audio.play();
-      playIcon.style.display="none";
-      pauseIcon.style.display="block";
-    } else {
-      audio.pause();
-      playIcon.style.display="block";
-      pauseIcon.style.display="none";
-    }
-  };
-
-  volume.oninput = ()=>{
-    audio.volume = volume.value;
-    if(audio.volume > 0){
-        audio.muted = false;
-        volIcon.style.display="block";
-        mutedIcon.style.display="none";
-    }
-  };
-
-  muteBtn.onclick = ()=>{
+  const muteBtn = document.getElementById("muteBtn");
+  muteBtn.onclick = () => {
     audio.muted = !audio.muted;
-    if(audio.muted){
-        volIcon.style.display="none";
-        mutedIcon.style.display="block";
-    } else {
-        volIcon.style.display="block";
-        mutedIcon.style.display="none";
-    }
+    muteBtn.textContent = audio.muted ? "🔊" : "🔇";
   };
+
 });
 </script>
+
 </body>
 </html>
